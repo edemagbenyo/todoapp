@@ -1,0 +1,8 @@
+
+body{
+  background-color: rgb(255, 210, 10);
+}
+input:checked + p{
+  background: #F9F9F9;
+  text-decoration: line-through;
+}
