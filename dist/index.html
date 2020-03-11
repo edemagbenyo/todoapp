@@ -9,31 +9,45 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </head>
-<body class="m-5">
+<body class="m-5 bg-dark">
   <header>
-    <div>
+    <div class="m-5">
       <h1 class="text-danger welcome text-center ">Organize your thoughts in One Place</h1>
     </div>
   </header>
 
-  <div class="jumbotron">
-    <div class="plus">
-      <button class="btn btn-danger">Add Task</button>
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-md-3 jumbotron">
+        <button class="btn btn-danger mt-3" id="btnProject">Add Project</button>
+        <form id="formProject" action="">
+          <input class="mb-2 col-md-9 form-control" type="text" placeholder="Project Name">
+          <button class="btn btn-success" type="submit" id="projectSubmit">Add Project</button>
+        </form>
+      </div>
+
+      <div class="col-md-8 ml-5">
+        <div class="plus">
+          <button class="btn btn-danger" id="btnTask">Add Task</button>
+        </div>
+        <form id="formTask" action="">
+          <input class="mb-2 col-md-2 form-control" type="text" id="inputTodo" placeholder="Title" required>
+          <textarea class="mb-2 col-md-5 form-control" type="text" id="txtDescription" placeholder="Description" required></textarea>
+          <input class="mb-2 col-md-3 form-control" type="date" id="inputDate" required>
+          <select class="col-md-2 mb-2 form-control" id="seletPriority" required>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+          <button class="btn btn-success" type="submit" id="btnSubmit">Add</button>
+        </form>
+      </div>
+
     </div>
-    <form class="" action="">
-      <input class="mb-2 col-md-2 form-control" type="text" id="inputTodo" placeholder="Title" required>
-      <input class="mb-2 col-md-6 form-control" type="text" id="txtDescription" placeholder="Description" required></input>
-      <input class="mb-2 col-md-2 form-control" type="date" id="inputDate" required>
-      <select class="col-md-1 mb-2 form-control" id="seletPriority" required>
-        <option value="low">Low</option>
-        <option value="medium">Medium</option>
-        <option value="high">High</option>
-      </select>
-      <button class="btn btn-success" type="submit" id="btnSubmit">Add</button>
-    </form>
+
   </div>
-
-
+  
   <div id="todoList">
   </div>
   <script src="./main.js"></script>

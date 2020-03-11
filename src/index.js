@@ -1,23 +1,32 @@
 import Structure from './structure';
 import './style.css'
 
-const button = document.querySelector('button');
-const form = document.querySelector('form');
+const buttonProject = document.querySelector('#btnProject');
+const buttonTask = document.querySelector('#btnTask');
+const formProject = document.querySelector('#formProject');
+const formTask = document.querySelector('#formTask');
 const inputTitle = document.querySelector('#inputTodo');
 const txtDescription = document.querySelector('#txtDescription');
 const inputDate = document.querySelector('#inputDate');
 const seletPriority = document.querySelector('#seletPriority');
 const todoList = document.querySelector('#todoList');
 
-button.addEventListener('click', () => {
-  button.style.display = "none";
-  form.style.display = "inline";
+buttonProject.addEventListener('click', () => {
+  buttonProject.style.display = "none";
+  formProject.style.display = "inline";
 })
 
-form.style.display = "none";
+buttonTask.addEventListener('click', () => {
+  buttonTask.style.display = "none";
+  formTask.style.display = "inline";
+})
+
+formProject.style.display = "none";
+
+formTask.style.display = "none";
 
 
-form.addEventListener('submit',(e)=>{
+formTask.addEventListener('submit',(e)=>{
   e.preventDefault();
   const divItem = document.createElement('div');
   divItem.classList='item';
