@@ -58,9 +58,20 @@ formTask.addEventListener('submit',(e)=>{
   // console.log(checkbox);
   const todo = Structure.addTodo(inputTitle.value,txtDescription.value,inputDate.value,seletPriority.value,false,projectID);
   divItem.innerHTML = `<input type="checkbox"><p data-id = ${todo.id} data-projectid = ${todo.projectid}>${todo.title} : ${todo.description}</p>`;
+
+  const editButton = document.createElement('button')
+  editButton.classList = 'btn btn-sm btn-info';
+  editButton.innerText = "Edit"
+  // TODO: extract this into its own function
+  const deleteButton = document.createElement('button')
+  deleteButton.classList = 'btn btn-sm btn-danger';
+  deleteButton.innerText = "Delete"
   
-  console.log(todo);
+  divItem.append(editButton,deleteButton);  
   todoList.append(divItem);
+
+  //reset all form elements
+  resetForm()
 
 })
 
@@ -114,4 +125,11 @@ function setActiveBadge(p){
   badge.setAttribute('class','badge badge-primary badge-pill');
   badge.innerHTML='active'
   p.append(badge);
+}
+
+function resetForm(){
+inputTitle.value=""
+txtDescription.value=""
+inputDate.value=""
+seletPriority.value="low"
 }
