@@ -15,6 +15,23 @@ export default (function(){
     todos.push(todo);
     return todo
   }
+
+  function updateTodo(todoid, title, description,duedate,priority,completed=false){
+    todos.map(todo=>{
+      if(todo.id == todoid){
+        todo.title=title;
+        todo.description=description
+        todo.dueDate = duedate
+        todo.completed = completed
+      }
+    })
+    console.log(todos);
+  }
+
+  // function delete(){
+
+  // }
+
   function changeStatus(id){
     const todo = todos.find(todo=>{
       todo.id == id
@@ -32,6 +49,7 @@ export default (function(){
     addTodo,
     changeStatus,
     addProject,
+    updateTodo,
     todos,
     projects
   }
