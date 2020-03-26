@@ -4,12 +4,24 @@ import './style.css'
 const buttonProject = document.querySelector('#btnProject');
 const buttonTask = document.querySelector('#btnTask');
 const formProject = document.querySelector('#formProject');
+const inputProjectName = document.querySelector('#projectName');
+const divProjects =  document.querySelector('.projects');
+
 const formTask = document.querySelector('#formTask');
 const inputTitle = document.querySelector('#inputTodo');
 const txtDescription = document.querySelector('#txtDescription');
 const inputDate = document.querySelector('#inputDate');
 const seletPriority = document.querySelector('#seletPriority');
 const todoList = document.querySelector('#todoList');
+
+
+//Load the default project
+const {projects} = Structure;
+projects.forEach(project=>{
+  const divProject = document.createElement('div');
+  divProject.innerHTML = `<p data-id= ${project.id}>${project.name}</p>`
+  divProjects.append(divProject)
+});
 
 buttonProject.addEventListener('click', () => {
   buttonProject.style.display = "none";
@@ -38,4 +50,15 @@ formTask.addEventListener('submit',(e)=>{
   
   todoList.append(divItem);
 
+})
+
+
+formProject.addEventListener('submit',(e)=>{
+  e.preventDefault();
+
+  const divProject = document.createElement('div');
+  const project = Structure.addProject(inputProjectName.value);
+  divProject.innerHTML = `<p data-id= ${project.id}>${project.name}</p>`
+
+  divProjects.append(divProject);
 })
