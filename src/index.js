@@ -52,12 +52,12 @@ formTask.addEventListener('submit',(e)=>{
   divItem.classList='item';
  
    //Get the project with data attribute of status=active
-   const activeProject = document.querySelector('p[data-status="active"]')
-   const projectID = activeProject.dataset.id;
+  const activeProject = document.querySelector('p[data-status="active"]')
+  const projectID = activeProject.dataset.id;
 
   // console.log(checkbox);
   const todo = Structure.addTodo(inputTitle.value,txtDescription.value,inputDate.value,seletPriority.value,false,projectID);
-  divItem.innerHTML = `<input type="checkbox"><p>${todo.title} : ${todo.description}</p>`;
+  divItem.innerHTML = `<input type="checkbox"><p data-id = ${todo.id} data-projectid = ${todo.projectid}>${todo.title} : ${todo.description}</p>`;
   
   console.log(todo);
   todoList.append(divItem);
@@ -77,6 +77,19 @@ formProject.addEventListener('submit',(e)=>{
 
 divProjects.addEventListener('click',(e)=>{
   const projects = document.querySelectorAll(".project");
+  const projectId = e.target.dataset.id;
+  const itemSelected = todoList.querySelectorAll('.item');
+  itemSelected.forEach(task => {
+  const pTag = task.children[1];
+  const pTagprojectId = pTag.dataset.projectid;
+  if (projectId != pTagprojectId) {
+    task.style.display = 'none';
+  }
+  else {
+    task.style.display = 'inline';
+  } 
+  });
+  
   projects.forEach(project=>{
     project.setAttribute("data-status","")
     const badge = project.querySelector('.badge');
