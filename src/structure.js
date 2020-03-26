@@ -10,8 +10,8 @@ export default (function(){
   const defaultProject = new Project("default");
   projects.push(defaultProject);
 
-  function addTodo(title,description,dueDate,priority){
-    const todo = new Todo(title,description,dueDate,priority);
+  function addTodo(title,description,dueDate,priority,completed,projectid){
+    const todo = new Todo(title,description,dueDate,priority,completed,projectid);
     todos.push(todo);
     return todo
   }
