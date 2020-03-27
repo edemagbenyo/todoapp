@@ -1,21 +1,19 @@
-export default class Model{
-  constructor(){
-
-  }
-  updateTodos(todos){
-    const string = JSON.stringify(todos)
-    localStorage.setItem('todos',string)
+export default class Model {
+  static updateTodos(todos) {
+    const string = JSON.stringify(todos);
+    localStorage.setItem('todos', string);
   }
 
-  getTodos(){
-    return localStorage.getItem('todos')
-  } 
-  updateProjects(projects){
-    const stringed = JSON.stringify(projects)
-    localStorage.setItem('projects',stringed)
+  static getTodos() {
+    return localStorage.getItem('todos');
   }
 
-  getProjects(){
-    return localStorage.getItem('projects')
-  } 
+  static updateProjects(projects) {
+    const stringed = JSON.stringify(projects);
+    localStorage.setItem('projects', stringed);
+  }
+
+  static getProjects() {
+    return localStorage.getItem('projects');
+  }
 }
