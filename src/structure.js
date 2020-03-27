@@ -28,9 +28,11 @@ export default (function(){
     console.log(todos);
   }
 
-  // function delete(){
-
-  // }
+  function deleteTodo(todoid){
+    const index = todos.findIndex(todo=>todo.todoid==todoid)
+    todos.splice(index,1)
+    console.log(todos);
+  }
 
   function changeStatus(id){
     const todo = todos.find(todo=>{
@@ -50,6 +52,7 @@ export default (function(){
     changeStatus,
     addProject,
     updateTodo,
+    deleteTodo,
     todos,
     projects
   }

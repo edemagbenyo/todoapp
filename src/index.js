@@ -58,6 +58,10 @@ formTask.addEventListener("submit", e => {
     //update item in the todoList
     const updated = document.querySelector('p[data-id="'+taskid.value+'"]')
     updated.innerText = `${inputTitle.value} : ${txtDescription.value}`
+
+    //reset all form elements
+    resetForm();
+    btnSubmit.innerText="Add"
     return;
   }
 
@@ -155,12 +159,14 @@ todoList.addEventListener("click", e => {
   const pTagId = e.target.previousSibling.dataset.id;
   const { todos } = Structure;
   const todo = todos.find(todo => todo.id == pTagId);
-  if (e.target.nodeName == "BUTTON") {
+  if (e.target.nodeName == "BUTTON" && e.target.innerText=="Edit") {
     editTask(todo);
 
     taskid.value = todo.id;
     //Change the text of save to update
     btnSubmit.innerText="Update"
+  }else if(e.target.nodeName == "BUTTON" && e.target.innerText=="Delete"){
+    deleteTask(e.target)
   }
 });
 function editTask(todo) {
@@ -170,5 +176,12 @@ function editTask(todo) {
   seletPriority.value = todo.priority;
 
   // Structure.updateTodo(todo)
+}
+function deleteTask(target){
+  const taskId = target.previousSibling.dataset.id;
+  //Remove the task from the list 
+  target.parentNode.remove()
+  //Remove the task from the array
+  Structure.deleteTodo(taskId)
 }
 
