@@ -1,18 +1,48 @@
 import Todo from './todo';
 import Project from './project';
+import Model from './model';
 // import Project from './project';
 export default (function(){
 
-  const todos = [];
-  const projects = [];
+  let todos = [];
+  const model = new Model();
+  let projects = []
 
-  //Initiliaze a default project
-  const defaultProject = new Project("default");
-  projects.push(defaultProject);
+ 
+
+  function liveTodos(){
+    return model.getTodos()
+  }
+
+  function setInitialTodos(){
+    const loadedTodos = JSON.parse(liveTodos())
+    if(!loadedTodos || loadedTodos.length == 0){
+      todos.push(...[])
+    }
+    todos.push(...(loadedTodos||[]))
+  }
+
+  function liveProjects(){
+    return model.getProjects();
+  }
+  function setInitialProjects(){
+    const loadedProjects = JSON.parse(liveProjects());
+
+    if(!loadedProjects || loadedProjects.length == 0){
+      const defaultProject = new Project("default");
+      projects.push(defaultProject);
+      model.updateProjects(projects);
+    }else{
+      projects.push(...loadedProjects);
+    }
+    
+  }
 
   function addTodo(title,description,dueDate,priority,completed,projectid){
     const todo = new Todo(title,description,dueDate,priority,completed,projectid);
     todos.push(todo);
+    
+    model.updateTodos(todos)
     return todo
   }
 
@@ -25,13 +55,13 @@ export default (function(){
         todo.completed = completed
       }
     })
-    console.log(todos);
+    model.updateTodos(todos)
   }
 
   function deleteTodo(todoid){
     const index = todos.findIndex(todo=>todo.todoid==todoid)
     todos.splice(index,1)
-    console.log(todos);
+    model.updateTodos(todos)
   }
 
   function changeStatus(id){
@@ -45,6 +75,7 @@ export default (function(){
   function addProject(name){
     const project = new Project(name)
     projects.push(project);
+    model.updateProjects(projects)
     return project;
   }
   return{
@@ -53,6 +84,10 @@ export default (function(){
     addProject,
     updateTodo,
     deleteTodo,
+    liveTodos,
+    setInitialTodos,
+    setInitialProjects,
+    liveProjects,
     todos,
     projects
   }

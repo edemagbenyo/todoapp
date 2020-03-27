@@ -16,19 +16,34 @@ const todoList = document.querySelector("#todoList");
 const taskid = document.querySelector("#taskid");
 const btnSubmit = document.querySelector("#btnSubmit");
 
+//Load tasks from localstorage
+Structure.setInitialTodos()
+Structure.setInitialProjects()
+
 //Load the default project
-const { projects } = Structure;
-projects.forEach(project => {
+const liveProjects = Structure.projects;
+liveProjects.forEach(project => {
   const divProject = document.createElement("div");
   const pProject = document.createElement("p");
   pProject.setAttribute("data-id", project.id);
   pProject.setAttribute("class", "project");
-  pProject.setAttribute("data-status", "active");
   pProject.innerText = project.name;
-  setActiveBadge(pProject);
+  if(project.name=='default') {
+    pProject.setAttribute("data-status", "active");
+    setActiveBadge(pProject);
+  }
   divProject.append(pProject);
   divProjects.append(divProject);
 });
+
+
+const liveTodos = Structure.todos
+const activeProjectId = document.querySelector('p[data-status="active"').dataset.id;
+liveTodos.filter(todo=>todo.projectid == activeProjectId).forEach((todo)=>{
+  
+  createTodo(todo)
+
+})
 
 buttonProject.addEventListener("click", () => {
   buttonProject.style.display = "none";
@@ -111,17 +126,14 @@ formProject.addEventListener("submit", e => {
 divProjects.addEventListener("click", e => {
   const projects = document.querySelectorAll(".project");
   const projectId = e.target.dataset.id;
-  const itemSelected = todoList.querySelectorAll(".item");
+  const itemSelected = liveTodos.filter((todo)=>todo.projectid == projectId);
+  //reset todoList
+  todoList.innerHTML =""
   itemSelected.forEach(task => {
-    const pTag = task.children[1];
-    const pTagprojectId = pTag.dataset.projectid;
-    if (projectId != pTagprojectId) {
-      task.style.display = "none";
-    } else {
-      task.style.display = "inline";
-    }
+    createTodo(task)
   });
 
+  
   projects.forEach(project => {
     project.setAttribute("data-status", "");
     const badge = project.querySelector(".badge");
@@ -185,3 +197,19 @@ function deleteTask(target){
   Structure.deleteTodo(taskId)
 }
 
+function createTodo(todo){
+  const divItem = document.createElement("div");
+  divItem.classList = "item";
+
+  divItem.innerHTML = `<input type="checkbox"><p data-id = ${todo.id} data-projectid = ${todo.projectid}>${todo.title} : ${todo.description}</p>`;
+  const editButton = document.createElement("button");
+  editButton.classList = "btn btn-sm btn-info edit";
+  editButton.innerText = "Edit";
+  // TODO: extract this into its own function
+  const deleteButton = document.createElement("button");
+  deleteButton.classList = "btn btn-sm btn-danger delete";
+  deleteButton.innerText = "Delete";
+
+  divItem.append(editButton, deleteButton);
+  todoList.append(divItem);
+}
