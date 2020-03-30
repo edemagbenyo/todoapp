@@ -4,12 +4,12 @@ import Model from './model';
 // import Project from './project';
 export default (function Structure() {
   const todos = [];
-  const model = new Model();
+  // const model = new Model();
   const projects = [];
 
 
   function liveTodos() {
-    return model.getTodos();
+    return Model.getTodos();
   }
 
   function setInitialTodos() {
@@ -21,7 +21,7 @@ export default (function Structure() {
   }
 
   function liveProjects() {
-    return model.getProjects();
+    return Model.getProjects();
   }
   function setInitialProjects() {
     const loadedProjects = JSON.parse(liveProjects());
@@ -29,7 +29,7 @@ export default (function Structure() {
     if (!loadedProjects || loadedProjects.length === 0) {
       const defaultProject = new Project('default');
       projects.push(defaultProject);
-      model.updateProjects(projects);
+      Model.updateProjects(projects);
     } else {
       projects.push(...loadedProjects);
     }
@@ -39,7 +39,7 @@ export default (function Structure() {
     const todo = new Todo(title, description, dueDate, priority, completed, projectid);
     todos.push(todo);
 
-    model.updateTodos(todos);
+    Model.updateTodos(todos);
     return todo;
   }
 
@@ -53,13 +53,13 @@ export default (function Structure() {
       }
       return todo;
     });
-    model.updateTodos(todos);
+    Model.updateTodos(todos);
   }
 
   function deleteTodo(todoid) {
     const index = todos.findIndex(todo => todo.todoid === todoid);
     todos.splice(index, 1);
-    model.updateTodos(todos);
+    Model.updateTodos(todos);
   }
 
   function changeStatus(id) {
@@ -71,7 +71,7 @@ export default (function Structure() {
   function addProject(name) {
     const project = new Project(name);
     projects.push(project);
-    model.updateProjects(projects);
+    Model.updateProjects(projects);
     return project;
   }
   return {
