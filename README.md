@@ -7,6 +7,17 @@ This is a Todo App where you can create, cross off, update and delete tasks. You
 
 =======
 
+# Getting Started
+- Download or clone this [repo](https://github.com/edemagbenyo/todoapp)
+- Install webpack and project dependencies
+- Run npx webpack
+- open the index.html file on liveserver
+- You can now comfortably create your task and assign them under projects.
+
+NB:
+- The default project at any point in time has an active badge
+
+
 ## Features
 
 - Create Projects
