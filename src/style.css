@@ -1,0 +1,5 @@
+input:checked + p{
+  background: #F9F9F9;
+  text-decoration: line-through;
+  color:red;
+}
