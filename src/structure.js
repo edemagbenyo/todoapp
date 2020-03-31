@@ -45,7 +45,7 @@ export default (function Structure() {
 
   function updateTodo(todoid, title, description, duedate, priority, completed = false) {
     todos.map(todo => {
-      if (todo.id === todoid) {
+      if (todo.id === parseInt(todoid)) {
         todo.title = title;
         todo.description = description;
         todo.dueDate = duedate;
