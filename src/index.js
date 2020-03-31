@@ -43,8 +43,6 @@ function editTask(todo) {
   txtDescription.value = todo.description;
   inputDate.value = todo.dueDate;
   seletPriority.value = todo.priority;
-
-  //ProjectController.updateTodo(todo);
 }
 function deleteTask(target) {
   const taskId = target.previousSibling.dataset.id;
